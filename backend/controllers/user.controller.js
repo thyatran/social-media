@@ -10,7 +10,27 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_SECRET_KEY,
 });
-// const getUserProfile = async (req, res) => {};
+
+const getUserProfile = async (req, res) => {
+  const userId = req.params.id || req.user._id;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(200).json({
+      userId: user._id,
+      username: user.username,
+      profilePic: user.profilePic,
+      bio: user.bio,
+    });
+  } catch (error) {
+    console.error("Error in getUserProfile: ", error.message);
+    res.status(500).json({ error: error.message || "Something went wrong" });
+  }
+};
 
 // const followUnfollowUser = async (req, res) => {};
 
@@ -59,4 +79,4 @@ const updateUser = async (req, res) => {
   }
 };
 
-export { updateUser };
+export { getUserProfile, updateUser };

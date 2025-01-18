@@ -18,10 +18,5 @@ Feature List:
 - Delete post
 - Like/Unlike post
 - Follow/unfollow users
-- Edit profile info (username, profile picture)
-
-Additional features for later:
-
-- dark/light mode
-- notification sounds
-- chat app with image upload
+- Comment on others' posts
+- Edit profile info (username, bio, profile picture)
