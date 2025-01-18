@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import commentSchema from "./comment.model.js";
+import Comment from "./comment.model.js";
 
 const postSchema = new mongoose.Schema(
   {
@@ -23,7 +23,12 @@ const postSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-    comments: [commentSchema],
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
   },
   { timestamps: true }
 );

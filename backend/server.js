@@ -4,9 +4,9 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 import authRoutes from "./route/auth.routes.js";
-import connectToMongoDB from "./db/connectToMongoDB.js";
+import userRoutes from "./route/user.routes.js";
 
-import uploadRoute from "./controllers/routeUpload.js";
+import connectToMongoDB from "./db/connectToMongoDB.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -14,11 +14,11 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
-
-app.use("/api/users", uploadRoute);
+app.use("/api/users", userRoutes);
 
 app.listen(PORT, () => {
   connectToMongoDB();

@@ -1,0 +1,62 @@
+import User from "../models/user.model.js";
+import { v2 as cloudinary } from "cloudinary";
+
+import dotenv from "dotenv";
+
+dotenv.config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET_KEY,
+});
+// const getUserProfile = async (req, res) => {};
+
+// const followUnfollowUser = async (req, res) => {};
+
+const updateUser = async (req, res) => {
+  const { bio } = req.body;
+  const profilePic = req.file;
+
+  const userId = req.user._id;
+
+  try {
+    let user = await User.findById(userId);
+    if (!user) return res.status(400).json({ error: "User not found" });
+
+    if (req.params.id !== userId.toString()) {
+      return res
+        .status(400)
+        .json({ error: "You cannot update another user's profile" });
+    }
+
+    if (profilePic) {
+      if (user.profilePic) {
+        await cloudinary.uploader.destroy(
+          user.profilePic.split("/").pop().split(".")[0]
+        );
+      }
+
+      const uploadedResponse = await cloudinary.uploader.upload(
+        profilePic.path
+      );
+      user.profilePic = uploadedResponse.secure_url;
+    }
+
+    user.bio = bio || user.bio;
+
+    user = await user.save();
+
+    res.status(200).json({
+      userId: user._id,
+      username: user.username,
+      profilePic: user.profilePic,
+      bio: user.bio,
+    });
+  } catch (error) {
+    console.log("Error in updateUser: ", error.message);
+    res.status(500).json({ error: error.essage });
+  }
+};
+
+export { updateUser };

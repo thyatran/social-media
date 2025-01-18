@@ -4,7 +4,7 @@ import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 export const signup = async (req, res) => {
   try {
-    const { username, password, confirmPassword, profilePic } = req.body;
+    const { username, password, confirmPassword, profilePic, bio } = req.body;
 
     if (password != confirmPassword) {
       return res.status(400).json({ error: "Password don't match" });
@@ -23,7 +23,8 @@ export const signup = async (req, res) => {
     const newUser = new User({
       username,
       password: hashedPassword,
-      profilePic,
+      profilePic: profilePic || "",
+      bio: bio || "",
     });
 
     if (newUser) {
@@ -35,6 +36,7 @@ export const signup = async (req, res) => {
         _id: newUser._id,
         username: newUser.username,
         profilePic: newUser.profilePic,
+        bio: newUser.bio,
       });
     } else {
       res.status(400).json({ error: "Invalid user data" });
@@ -46,9 +48,37 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  console.log("Login");
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    const isPasswordCorrect = await bcryptjs.compare(
+      password,
+      user?.password || ""
+    );
+
+    if (!user || !isPasswordCorrect) {
+      return res.status(400).json({ error: "Invalid username or password" });
+    }
+
+    generateTokenAndSetCookie(user._id, res);
+
+    res.status(200).json({
+      _id: user._id,
+      username: user.username,
+      profilePic: user.profilePic,
+    });
+  } catch (error) {
+    console.log("Error in login controller", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 export const logout = async (req, res) => {
-  console.log("Logout");
+  try {
+    res.cookie("jwt", "", { maxAge: 0 });
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    console.log("Error in logout controller", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };

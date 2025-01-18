@@ -1,13 +1,8 @@
-import multer, { diskStorage } from "multer";
-import path from "path";
+import multer from "multer";
 
-// Set storage configuration for Multer
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "backend/uploads/");
-  },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
+    cb(null, file.originalname);
   },
 });
 
