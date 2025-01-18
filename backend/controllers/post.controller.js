@@ -192,6 +192,55 @@ const getUserPosts = async (req, res) => {
     });
     res.status(200).json(posts);
   } catch (error) {
+    console.log("Error in getUserPosts: ", error.message);
+
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const editPost = async (req, res) => {
+  try {
+    const { text } = req.body;
+    const img = req.file;
+    const postId = req.params.id;
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    if (post.postedBy.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ error: "Unauthorized to edit this post" });
+    }
+
+    const maxLength = 500;
+    if (text && text.length > maxLength) {
+      return res
+        .status(400)
+        .json({ error: `Text must be less than ${maxLength} characters` });
+    }
+
+    // update the image if user upload new one
+    let imgUrl = post.image;
+    if (img) {
+      // delete the old image from cloudinary
+      if (post.image) {
+        const imgId = post.image.split("/").pop().split(".")[0];
+        await cloudinary.uploader.destroy(imgId);
+      }
+
+      // upload the new image
+      const uploadedResponse = await cloudinary.uploader.upload(img.path);
+      imgUrl = uploadedResponse.secure_url;
+    }
+    post.text = text || post.text;
+    post.image = imgUrl;
+
+    await post.save();
+    res.status(200).json(post);
+  } catch (error) {
+    console.log("Error in editPost: ", error.message);
     res.status(500).json({ error: error.message });
   }
 };
@@ -203,4 +252,5 @@ export {
   likeUnlikePost,
   replyToPost,
   getUserPosts,
+  editPost,
 };
