@@ -1,17 +1,17 @@
 import mongoose from "mongoose";
-import Comment from "./comment.model.js";
 
 const postSchema = new mongoose.Schema(
   {
-    userId: {
+    postedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    content: {
+    text: {
       type: String,
       required: true,
       trim: true,
+      minlength: [10, "Post content must be at least 10 characters long"],
     },
     image: {
       type: String, // URL to the post image
