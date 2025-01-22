@@ -69,6 +69,7 @@ const followUnfollowUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { bio } = req.body;
   const profilePic = req.file;
+  const bioLength = 150;
 
   const userId = req.user._id;
 
@@ -95,7 +96,13 @@ const updateUser = async (req, res) => {
       user.profilePic = uploadedResponse.secure_url;
     }
 
-    user.bio = bio || user.bio;
+    if (bio && bio.length > bioLength) {
+      return res
+        .status(400)
+        .json({ error: `Bio can't be longer than ${bioLength} characters` });
+    } else {
+      user.bio = bio || user.bio;
+    }
 
     user = await user.save();
 

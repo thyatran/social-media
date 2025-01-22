@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #f9f9f9;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
