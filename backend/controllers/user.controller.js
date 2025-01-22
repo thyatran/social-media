@@ -23,6 +23,7 @@ const getUserProfile = async (req, res) => {
     res.status(200).json({
       userId: user._id,
       username: user.username,
+      fullname: user.fullname,
       profilePic: user.profilePic,
       bio: user.bio,
     });
@@ -67,9 +68,10 @@ const followUnfollowUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { bio } = req.body;
+  const { bio, fullname } = req.body;
   const profilePic = req.file;
   const bioLength = 150;
+  const fullnamelength = 50;
 
   const userId = req.user._id;
 
@@ -104,11 +106,21 @@ const updateUser = async (req, res) => {
       user.bio = bio || user.bio;
     }
 
+    if (fullname) {
+      if (fullname.length > fullnamelength) {
+        return res.status(400).json({
+          error: `Fullname can't be longer than ${fullnamelength} characters`,
+        });
+      }
+      user.fullname = fullname;
+    }
+
     user = await user.save();
 
     res.status(200).json({
       userId: user._id,
       username: user.username,
+      fullname: user.fullname,
       profilePic: user.profilePic,
       bio: user.bio,
     });
