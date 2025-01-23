@@ -30,7 +30,7 @@ const Login = () => {
         </div>
 
         {/* Already have an account? Login. */}
-        <Link to="/login" className="text-gray-500 hover:underline">
+        <Link to="/signup" className="text-gray-500 hover:underline">
           Don't have an account? Sign Up.
         </Link>
 
