@@ -4,11 +4,11 @@ import PostContainer from "../../components/posts/PostContainer";
 
 const Home = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-between w-full px-10 gap-10">
-      <div className="flex-grow mx-auto max-w-3xl">
+    <div className="flex flex-col items-center md:flex-row min-h-screen w-full">
+      <div className="flex flex-grow justify-center items-center mx-auto w-full max-w-3xl p-4">
         <PostContainer />
       </div>
-      <div className="shrink-0">
+      <div className="shrink-0 w-full md:w-64 md:h-full">
         <Navbar />
       </div>
     </div>
