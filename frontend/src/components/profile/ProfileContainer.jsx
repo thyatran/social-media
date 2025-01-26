@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import EditProfile from "../profile/EditProfile";
-import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
+
+import ProfilePosts from "./ProfilePosts";
 
 const ProfileContainer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,7 +11,7 @@ const ProfileContainer = () => {
   return (
     <div className="flex flex-col md:flex-row justify-center items-center w-full min-h-full">
       {/* Floating Box */}
-      <div className="border border-gray-900 w-[400px] h-[600px] bg-white shadow-lg flex flex-col">
+      <div className="border-4 border-gray-900 w-[400px] h-[600px] bg-white shadow-lg flex flex-col">
         {/* Profile Info */}
         <div className="p-4 border-b border-gray-300">
           <div className="flex items-center gap-10">
@@ -44,43 +45,8 @@ const ProfileContainer = () => {
         {/* Posts Section (Scrollable) */}
         <div className="flex-1 overflow-y-auto p-4">
           <p className="text-lg font-semibold mb-4">Posts</p>
-          <div className="flex flex-col gap-4">
-            {/* Example Posts */}
-            {[...Array(20)].map((_, index) => (
-              <div
-                key={index}
-                className="border border-gray-300 p-4 rounded-md"
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <img
-                    src="/profilepic1.jpg"
-                    alt="User Avatar"
-                    className="w-8 h-8 rounded-full"
-                  />
-                  <p className="text-sm text-gray-800 font-semibold">
-                    Onion_ni
-                  </p>
-                  <p className="text-sm ">Yesterday 10:31</p>
-                </div>
-                <p className="text-sm mb-2">A cat watching the stars!</p>
-                <img
-                  src="/cat-watching-stars.jpg"
-                  alt="Post Image"
-                  className="w-auto h-20 rounded-md"
-                />
-                <div className="flex gap-10 items-center mt-3 text-gray-400">
-                  <div className="flex items-center gap-1">
-                    <FaRegHeart />
-                    <p className="text-sm">2.4k</p>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <FaRegComment />
-                    <p className="text-sm">2.4k</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          {/* Example Posts */}
+          <ProfilePosts />
         </div>
       </div>
       {isModalOpen && <EditProfile onClose={closeModal} />}
