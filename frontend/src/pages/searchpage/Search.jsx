@@ -1,11 +1,14 @@
 import React from "react";
 import Navbar from "../../components/navbar/Navbar";
+import SearchContainer from "../../components/search/searchContainer";
 
 const Search = () => {
   return (
-    <div className="flex flex-row justify-between w-full px-10 gap-10">
-      <div className="flex-grow mx-auto max-w-3xl">Search</div>
-      <div className="shrink-0">
+    <div className="flex flex-col items-center md:flex-row min-h-screen w-full">
+      <div className="flex flex-grow justify-center items-center mx-auto w-full max-w-3xl p-4">
+        <SearchContainer />
+      </div>
+      <div className="shrink-0 w-full md:w-64 md:h-full">
         <Navbar />
       </div>
     </div>
