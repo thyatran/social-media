@@ -3,9 +3,10 @@ import { NavLink } from "react-router-dom";
 import { RiHome3Line, RiHome3Fill } from "react-icons/ri";
 import { IoSearch } from "react-icons/io5";
 import { FiPlus } from "react-icons/fi";
-import { FiLogOut } from "react-icons/fi";
+
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import CreatePost from "../posts/CreatePost";
+import LogoutButton from "./LogoutButton";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,9 +47,7 @@ const Navbar = () => {
         {({ isActive }) => (isActive ? <FaHeart /> : <FaRegHeart />)}
       </NavLink>
 
-      <div className={`${linkStyle}`}>
-        <FiLogOut />
-      </div>
+      <LogoutButton />
 
       {/* Modal for Adding a Post */}
       {isModalOpen && <CreatePost onClose={closeModal} />}
