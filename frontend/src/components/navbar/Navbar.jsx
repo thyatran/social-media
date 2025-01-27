@@ -7,11 +7,15 @@ import { FiPlus } from "react-icons/fi";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import CreatePost from "../posts/CreatePost";
 import LogoutButton from "./LogoutButton";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const { authUser } = useAuthContext();
+  const profilePic = authUser.profilePic;
 
   const linkStyle =
     "flex items-center justify-center w-12 h-12 md:w-14 md:h-14 text-gray-900 text-2xl hover:bg-gray-200 rounded-full transition";
@@ -21,8 +25,8 @@ const Navbar = () => {
       {/* Profile */}
       <NavLink to="/profile" className={`${linkStyle} w-20 h-auto`}>
         <img
-          src="/profilepic1.jpg"
-          alt="Profile"
+          src={profilePic}
+          alt="Profile Picture"
           className="h-full w-full rounded-full object-cover"
         />
       </NavLink>

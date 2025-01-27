@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "../../components/navbar/Navbar";
 import ProfileContainer from "../../components/profile/ProfileContainer";
-import PostContainer from "../../components/posts/PostContainer";
 
 const Profile = () => {
   return (

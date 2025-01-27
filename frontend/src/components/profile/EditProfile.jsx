@@ -17,21 +17,33 @@ const EditProfile = ({ onClose }) => {
           <h2 className="text-lg font-bold text-gray-950">Edit Profile</h2>
         </div>
 
-        <textarea
-          className="w-full p-2 border rounded-md mb-4"
-          placeholder="What's on your mind?"
-          rows={4}
-        ></textarea>
+        <form>
+          <textarea
+            id="bio"
+            name="bio"
+            className="w-full p-2 border rounded-md mb-4 bg-transparent"
+            placeholder="Update bio"
+            rows={4}
+            maxLength={150}
+          ></textarea>
+          <input
+            id="profilePic"
+            name="profilePic"
+            type="file"
+            accept="image/*"
+            className="mb-4"
+          />
 
-        {/* Post button */}
-        <div className="flex justify-center">
-          <button
-            onClick={onClose}
-            className="px-10 py-2 bg-gray-900 text-white rounded-none"
-          >
-            Update
-          </button>
-        </div>
+          {/* Post button */}
+          <div className="flex justify-center">
+            <button
+              onClick={onClose}
+              className="px-10 py-2 bg-gray-900 text-white rounded-none"
+            >
+              Update
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
