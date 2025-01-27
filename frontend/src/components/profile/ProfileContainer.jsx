@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EditProfile from "../profile/EditProfile";
 import ProfilePosts from "./ProfilePosts";
 import { useAuthContext } from "../../context/AuthContext";
+import { useParams } from "react-router-dom";
 
 const ProfileContainer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -9,10 +10,39 @@ const ProfileContainer = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const { authUser } = useAuthContext();
-  const username = authUser.username;
-  const fullname = authUser.fullname;
-  const bio = authUser.bio;
-  const profilePic = authUser.profilePic;
+  const { username: profileUsername } = useParams();
+
+  // check if it's logged in user's profile
+  const usernameToDisplay = profileUsername || authUser.username;
+  const isOwnProfile = usernameToDisplay === authUser.username;
+
+  const [userProfile, setUserProfile] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!profileUsername || isOwnProfile) {
+      setUserProfile(authUser);
+    } else {
+      fetch(`/api/users/${profileUsername}`)
+        .then((res) => res.json())
+        .then((data) => setUserProfile(data))
+        .catch((err) => setError("Error loading profile: " + err.message));
+    }
+  }, [profileUsername, authUser, isOwnProfile]);
+
+  if (!authUser) {
+    return <span className="loading loading-spinner"></span>;
+  }
+
+  if (!userProfile && !error) {
+    return <span className="loading loading-spinner"></span>;
+  }
+
+  if (error) {
+    return <p className="text-red-500">{error}</p>;
+  }
+
+  const { fullname, bio, profilePic } = userProfile;
 
   return (
     <div className="flex flex-col md:flex-row justify-center items-center w-full min-h-full">
@@ -29,19 +59,23 @@ const ProfileContainer = () => {
               />
             </div>
             <div>
-              <p className="text-lg font-semibold text-black">{username}</p>
+              <p className="text-lg font-semibold text-black">
+                {profileUsername || authUser.username}
+              </p>
               <div className="flex gap-2 text-sm text-gray-700">
                 <p>10 Followers</p>
                 <p>10 Following</p>
               </div>
               <p className="text-sm font-extrabold text-gray-700">{fullname}</p>
               <p className="text-sm text-gray-500 italic">{bio}</p>
-              <button
-                onClick={openModal}
-                className="mt-2 bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-950 transition"
-              >
-                Edit Profile
-              </button>
+              {isOwnProfile && (
+                <button
+                  onClick={openModal}
+                  className="mt-2 bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-950 transition"
+                >
+                  Edit Profile
+                </button>
+              )}
             </div>
           </div>
         </div>

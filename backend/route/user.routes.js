@@ -9,7 +9,7 @@ import upload from "../middlewares/multer.js";
 
 const router = express.Router();
 
-router.get("/:id", protectRoute, getUserProfile);
+router.get("/:username", protectRoute, getUserProfile);
 router.put(
   "/update/:id",
   protectRoute,

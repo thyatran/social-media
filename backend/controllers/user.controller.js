@@ -12,10 +12,10 @@ cloudinary.config({
 });
 
 const getUserProfile = async (req, res) => {
-  const userId = req.params.id || req.user._id;
+  const username = req.params.username || req.user.username;
 
   try {
-    const user = await User.findById(userId);
+    const user = await User.findOne({ username: username });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
