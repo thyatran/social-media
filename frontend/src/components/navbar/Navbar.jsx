@@ -8,6 +8,7 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import CreatePost from "../posts/CreatePost";
 import LogoutButton from "./LogoutButton";
 import { useAuthContext } from "../../context/AuthContext";
+import ProfilePicDefault from "../profile/ProfilePicDefault";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +16,7 @@ const Navbar = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const { authUser } = useAuthContext();
-  const profilePic = authUser.profilePic;
+  const profilePic = authUser?.profilePic;
 
   const linkStyle =
     "flex items-center justify-center w-12 h-12 md:w-14 md:h-14 text-gray-900 text-2xl hover:bg-gray-200 rounded-full transition";
@@ -24,11 +25,15 @@ const Navbar = () => {
     <div className="flex md:flex-col justify-between md:justify-start items-center bg-transparent p-4 gap-4 w-full md:h-full mx-auto">
       {/* Profile */}
       <NavLink to="/profile" className={`${linkStyle} w-20 h-auto`}>
-        <img
-          src={profilePic}
-          alt="Profile Picture"
-          className="h-full w-full rounded-full object-cover"
-        />
+        {profilePic ? (
+          <img
+            src={profilePic}
+            alt="Profile Picture"
+            className="h-full w-full rounded-full object-cover"
+          />
+        ) : (
+          <ProfilePicDefault username={authUser?.username || "User"} />
+        )}
       </NavLink>
 
       {/* Home */}

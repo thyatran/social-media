@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/:username", protectRoute, getUserProfile);
 router.put(
-  "/update/:id",
+  "/update/:username",
   protectRoute,
   upload.single("profilePic"),
   updateUser

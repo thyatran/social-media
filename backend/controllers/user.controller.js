@@ -73,13 +73,13 @@ const updateUser = async (req, res) => {
   const bioLength = 150;
   const fullnamelength = 50;
 
-  const userId = req.user._id;
+  const username = req.params.username || req.user.username;
 
   try {
-    let user = await User.findById(userId);
+    let user = await User.findOne({ username });
     if (!user) return res.status(400).json({ error: "User not found" });
 
-    if (req.params.id !== userId.toString()) {
+    if (req.params.username !== req.user.username) {
       return res
         .status(400)
         .json({ error: "You cannot update another user's profile" });

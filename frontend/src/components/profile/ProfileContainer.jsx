@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EditProfile from "../profile/EditProfile";
 import ProfilePosts from "./ProfilePosts";
+import ProfilePicDefault from "./ProfilePicDefault";
 import { useAuthContext } from "../../context/AuthContext";
 import { useParams } from "react-router-dom";
 
@@ -13,8 +14,8 @@ const ProfileContainer = () => {
   const { username: profileUsername } = useParams();
 
   // check if it's logged in user's profile
-  const usernameToDisplay = profileUsername || authUser.username;
-  const isOwnProfile = usernameToDisplay === authUser.username;
+  const usernameToDisplay = profileUsername || authUser?.username || "User";
+  const isOwnProfile = usernameToDisplay === authUser?.username;
 
   const [userProfile, setUserProfile] = useState(null);
   const [error, setError] = useState(null);
@@ -42,7 +43,7 @@ const ProfileContainer = () => {
     return <p className="text-red-500">{error}</p>;
   }
 
-  const { fullname, bio, profilePic } = userProfile;
+  const { fullname = "", bio = "", profilePic = "" } = userProfile || {};
 
   return (
     <div className="flex flex-col md:flex-row justify-center items-center w-full min-h-full">
@@ -51,12 +52,21 @@ const ProfileContainer = () => {
         {/* Profile Info */}
         <div className="p-4 border-b border-gray-300">
           <div className="flex items-center gap-10">
-            <div className="avatar w-24 h-24">
-              <img
+            <div className="w-24 h-24 items-center justify-center rounded-full">
+              {/* <img
                 src={profilePic}
                 alt="Profile Picture"
                 className="rounded-full border border-gray-300"
-              />
+              /> */}
+              {profilePic ? (
+                <img
+                  src={profilePic}
+                  alt="Profile Picture"
+                  className="rounded-full border border-gray-300"
+                />
+              ) : (
+                <ProfilePicDefault username={usernameToDisplay} />
+              )}
             </div>
             <div>
               <p className="text-lg font-semibold text-black">
