@@ -11,7 +11,6 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      minlength: [10, "Post content must be at least 10 characters long"],
     },
     image: {
       type: String, // URL to the post image

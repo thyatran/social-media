@@ -48,9 +48,9 @@ const ProfileContainer = () => {
   return (
     <div className="flex flex-col md:flex-row justify-center items-center w-full min-h-full">
       {/* Floating Box */}
-      <div className="border-4 border-gray-900 w-[400px] h-[600px] bg-white shadow-lg flex flex-col">
+      <div className="border-2 border-gray-900 w-[400px] h-[600px] bg-white shadow-lg flex flex-col">
         {/* Profile Info */}
-        <div className="p-4 border-b border-gray-300">
+        <div className="p-4 border-b border-gray-950">
           <div className="flex items-center gap-10">
             <div className="w-24 h-24 items-center justify-center rounded-full">
               {/* <img
