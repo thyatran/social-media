@@ -1,7 +1,10 @@
 import React from "react";
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
+import { useAuthContext } from "../../context/AuthContext";
 
 const ProfilePosts = () => {
+  const { authUser } = useAuthContext();
+
   return (
     <div className="flex flex-col gap-4">
       {[...Array(20)].map((_, index) => (

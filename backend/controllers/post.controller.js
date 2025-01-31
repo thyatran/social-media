@@ -15,7 +15,7 @@ cloudinary.config({
 const createPost = async (req, res) => {
   try {
     const { text } = req.body;
-    const img = req.file;
+    const image = req.file;
 
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -37,8 +37,8 @@ const createPost = async (req, res) => {
 
     let imgUrl = "";
 
-    if (img) {
-      const uploadedResponse = await cloudinary.uploader.upload(img.path);
+    if (image) {
+      const uploadedResponse = await cloudinary.uploader.upload(image.path);
       imgUrl = uploadedResponse.secure_url;
     }
 

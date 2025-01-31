@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.get("/:id", getPost);
 router.get("/user/:username", getUserPosts);
-router.post("/create", protectRoute, upload.single("img"), createPost);
+router.post("/create", protectRoute, upload.single("image"), createPost);
 router.delete("/:id", protectRoute, deletePost);
 router.put("/like/:id", protectRoute, likeUnlikePost);
 router.put("/reply/:id", protectRoute, replyToPost);

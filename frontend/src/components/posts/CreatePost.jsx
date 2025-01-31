@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaFileImage } from "react-icons/fa";
 import useCreatePost from "../../hooks/useCreatePost";
+import toast from "react-hot-toast";
 
 const CreatePost = ({ onClose }) => {
   const { loading, createPost } = useCreatePost();
@@ -15,20 +16,14 @@ const CreatePost = ({ onClose }) => {
       setPreview(URL.createObjectURL(file));
     }
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("text", text);
-    if (image) {
-      formData.append("image", image);
+    if (!text.trim()) {
+      toast.error("Post caption cannot be empty");
+      return;
     }
 
-    for (let pair of formData.entries()) {
-      console.log(pair[0], pair[1]); // Logs key-value pairs
-    }
-
-    createPost(formData);
+    await createPost(text, image);
     onClose();
   };
 
