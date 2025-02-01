@@ -13,8 +13,10 @@ import upload from "../middlewares/multer.js";
 
 const router = express.Router();
 
-router.get("/:id", getPost);
 router.get("/user/:username", getUserPosts);
+router.get("/user", protectRoute, getUserPosts);
+router.get("/:id", getPost);
+
 router.post("/create", protectRoute, upload.single("image"), createPost);
 router.delete("/:id", protectRoute, deletePost);
 router.put("/like/:id", protectRoute, likeUnlikePost);

@@ -1,5 +1,6 @@
 import React from "react";
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
+import { extractTime } from "../../utils/extractTime";
 
 const Post = () => {
   return (

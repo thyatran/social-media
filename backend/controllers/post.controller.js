@@ -177,21 +177,28 @@ const getFeedPosts = async (req, res) => {
 };
 
 const getUserPosts = async (req, res) => {
-  const { username } = req.params;
   try {
-    const user = await User.findOne({ username });
+    let user;
+    if (req.params.username) {
+      user = await User.findOne({ username: req.params.username });
+    } else {
+      // fetch posts for the logged-in user
+      user = await User.findById(req.user._id);
+    }
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    const posts = await Post.find({ postedBy: user._id }).sort({
-      createdAt: -1,
-    });
+    const posts = await Post.find({ postedBy: user._id })
+      .populate("postedBy", "username profilePic")
+      .sort({
+        createdAt: -1,
+      });
+
     res.status(200).json(posts);
   } catch (error) {
     console.log("Error in getUserPosts: ", error.message);
-
     res.status(500).json({ error: error.message });
   }
 };
