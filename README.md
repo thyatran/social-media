@@ -8,7 +8,7 @@ You can view the live demo of the app here: Link
 
 ## Design
 
-You can view the Figma design here: Link
+You can view the Figma design here: [Link](https://www.figma.com/design/NhL1mHjOYN2aRhdeV4IcBI/mini-social-media?node-id=0-1&t=d8KCcAucEjEBCNIv-1)
 
 ## Completed Features
 
@@ -34,9 +34,9 @@ You can view the Figma design here: Link
 
 ## Technology Used
 
-- **Frontend:** React.js, Tailwind CSS, Material-UI
+- **Frontend:** React.js, Tailwind CSS
 
-- **Backend:** Node.js, Express.hs, JWT (JSON Web Tokens), RESTful API, Bcrypt.js, Multer (file upload)
+- **Backend:** Node.js, Express.js, JWT (JSON Web Tokens), RESTful API, Bcrypt.js, Multer (file upload)
 
 - **Database:** MongoDB, Mongoose
 
@@ -44,7 +44,7 @@ You can view the Figma design here: Link
 
 - **Authentication:** JWT for secure session handling
 
-- **Deployment:** Render (for hosting and CI/CD pipelines)
+- **Deployment:** Render
 
 ## Installation
 
