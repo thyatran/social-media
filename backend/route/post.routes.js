@@ -7,15 +7,17 @@ import {
   replyToPost,
   getUserPosts,
   editPost,
+  getFeedPosts,
 } from "../controllers/post.controller.js";
 import protectRoute from "../middlewares/protectRoute.js";
 import upload from "../middlewares/multer.js";
 
 const router = express.Router();
 
-router.get("/user/:username", getUserPosts);
+router.get("/user/:username", protectRoute, getUserPosts);
 router.get("/user", protectRoute, getUserPosts);
-router.get("/:id", getPost);
+router.get("/:id", protectRoute, getPost);
+router.get("/", protectRoute, getFeedPosts);
 
 router.post("/create", protectRoute, upload.single("image"), createPost);
 router.delete("/:id", protectRoute, deletePost);

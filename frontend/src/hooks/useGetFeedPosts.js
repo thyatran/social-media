@@ -1,35 +1,30 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
-const useGetUserPosts = () => {
-  const { username } = useParams();
-  const [posts, setPosts] = useState([]);
+const useGetFeedPosts = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const endpoint = username ? `/api/posts/user/${username}` : `/api/posts/user`;
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const res = await fetch(endpoint, { credentials: "include" });
+        const res = await fetch(`/api/posts`, { credentials: "include" });
         const data = await res.json();
 
         if (!res.ok) throw new Error(data.error || "Failed to fetch posts");
 
         setPosts(data);
       } catch (error) {
-        setError(error.message);
+        toast.error(error.message);
       } finally {
         setLoading(false);
       }
     };
 
     fetchPosts();
-  }, [username]);
-  return { posts, loading, error };
+  }, []);
+  return { loading, posts };
 };
 
-export default useGetUserPosts;
+export default useGetFeedPosts;
