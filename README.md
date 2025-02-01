@@ -10,21 +10,27 @@ You can view the live demo of the app here: Link
 
 You can view the Figma design here: Link
 
-## Features
+## Completed Features
 
 - **User Authentication:** Signup, Login, and Logout functionality using JWT (JSON Web Tokens).
 
-- **Profile Management:** Users can create, update and display profiles with a username, bio, and profile picture.
+- **Profile Management:** Users can create, update and display profiles with a full name, bio, and profile picture.
 
-- **Post Management:** Users can create, read, update, and delete posts, including text and image uploads.
+- **Post Management:** Users can create and read posts, including text and image uploads.
+
+- **Responsive UI:** A modern and responsive design using React.js, Tailwind CSS, and Material-UI.
+
+- **Cloud Storage:** Integrated with Cloudinary for efficient image storage.
+
+## Features In Progress
+
+- **Post Management:** Users can update and delete posts, including text and image uploads.
 
 - **CRUD Operations:** Manage posts and comments with full CRUD functionality.
 
 - **Follow/Unfollow:** Users can follow and unfollow other users to see their posts on the feed.
 
-- **Responsive UI:** A modern and responsive design using React.js, Tailwind CSS, and Material-UI.
-
-- **Cloud Storage:** Integrated with Cloudinary for efficient image storage.
+- **Like/Unlike:** Users can like and unlike others' posts.
 
 ## Technology Used
 

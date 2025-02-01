@@ -87,7 +87,7 @@ const CreatePost = ({ onClose }) => {
                   <img
                     src={preview}
                     alt="Preview"
-                    className="w-full max-h-40 object-cover rounded-lg"
+                    className="w-full max-h-50 object-cover rounded-lg"
                   />
                 </div>
               )}
