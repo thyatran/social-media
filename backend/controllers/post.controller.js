@@ -155,7 +155,9 @@ const replyToPost = async (req, res) => {
 
 const getFeedPosts = async (req, res) => {
   try {
-    const feedPosts = await Post.find().sort({ createdAt: -1 });
+    const feedPosts = await Post.find()
+      .populate("postedBy", "username profilePic")
+      .sort({ createdAt: -1 });
 
     res.status(200).json(feedPosts);
   } catch (error) {
