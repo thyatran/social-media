@@ -4,7 +4,7 @@ import { extractTime } from "../../utils/extractTime";
 
 const Post = ({ post }) => {
   return (
-    <div className="border border-gray-300 p-4 rounded-md">
+    <div className="border border-gray-300 p-4 rounded-box">
       <div className="flex items-center gap-2 mb-2">
         <img
           src={post.postedBy.profilePic || "/profilepic1.jpg"}
@@ -21,7 +21,7 @@ const Post = ({ post }) => {
         <img
           src={post.image}
           alt="Post Image"
-          className="w-auto h-40 rounded-md object-cover"
+          className="w-auto h-26 rounded-md object-cover"
         />
       )}
 
