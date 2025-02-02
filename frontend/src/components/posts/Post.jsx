@@ -26,7 +26,7 @@ const Post = ({ post }) => {
       )}
 
       <div className="flex gap-10 items-center mt-3 text-gray-400">
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 cursor-pointer">
           <FaRegHeart />
           <p className="text-sm">{post.likes.length}</p>
         </div>

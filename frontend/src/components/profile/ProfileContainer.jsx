@@ -53,11 +53,6 @@ const ProfileContainer = () => {
         <div className="p-4 border-b border-gray-950">
           <div className="flex items-center gap-10">
             <div className="w-24 h-24 items-center justify-center rounded-full">
-              {/* <img
-                src={profilePic}
-                alt="Profile Picture"
-                className="rounded-full border border-gray-300"
-              /> */}
               {profilePic ? (
                 <img
                   src={profilePic}
