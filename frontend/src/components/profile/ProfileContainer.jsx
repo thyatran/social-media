@@ -24,7 +24,7 @@ const ProfileContainer = () => {
     if (!profileUsername || isOwnProfile) {
       setUserProfile(authUser);
     } else {
-      fetch(`/api/users/${profileUsername}`)
+      fetch(`${import.meta.env.VITE_API_URL}/api/users/${profileUsername}`)
         .then((res) => res.json())
         .then((data) => setUserProfile(data))
         .catch((err) => setError("Error loading profile: " + err.message));

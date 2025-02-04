@@ -18,6 +18,7 @@ const app = express();
 app.use(
   cors({
     origin: ["https://social-media-eta-bay.vercel.app"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })
 );
