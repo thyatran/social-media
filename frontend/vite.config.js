@@ -8,7 +8,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "https://social-media-backend-jyq3.onrender.com",
+        target: "https://social-media-backend-jyq3.onrender.com/",
       },
     },
   },
