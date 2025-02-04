@@ -17,16 +17,19 @@ const useSignup = () => {
     if (!success) return;
 
     try {
-      const res = await fetch(`/api/auth/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username,
-          fullname,
-          password,
-          confirmPassword,
-        }),
-      });
+      const res = await fetch(
+        `https://social-media-backend-jyq3.onrender.com/api/auth/signup`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username,
+            fullname,
+            password,
+            confirmPassword,
+          }),
+        }
+      );
 
       const data = await res.json();
       if (data.error) {

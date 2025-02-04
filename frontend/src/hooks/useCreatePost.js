@@ -31,11 +31,14 @@ const useCreatePost = () => {
         formData.append("image", image);
       }
 
-      const res = await fetch(`/api/posts/create`, {
-        method: "POST",
-        body: formData,
-        credentials: "include",
-      });
+      const res = await fetch(
+        `https://social-media-backend-jyq3.onrender.com/api/posts/create`,
+        {
+          method: "POST",
+          body: formData,
+          credentials: "include",
+        }
+      );
 
       const data = await res.json();
 

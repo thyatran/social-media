@@ -9,9 +9,12 @@ const useGetFeedPosts = () => {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/posts`, {
-          credentials: "include",
-        });
+        const res = await fetch(
+          `https://social-media-backend-jyq3.onrender.com/api/posts`,
+          {
+            credentials: "include",
+          }
+        );
         const data = await res.json();
 
         if (!res.ok) throw new Error(data.error || "Failed to fetch posts");
