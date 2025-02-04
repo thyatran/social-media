@@ -47,13 +47,6 @@ const App = () => {
           path="/liked-posts"
           element={authUser ? <LikedPage /> : <Navigate to={"/login"} />}
         />
-
-        {/* <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/liked-posts" element={<LikedPage />} /> */}
       </Routes>
       <Toaster />
     </div>
