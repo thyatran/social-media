@@ -17,6 +17,10 @@ const useGetUserPosts = () => {
       setLoading(true);
       try {
         const res = await fetch(endpoint, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
           credentials: "include",
         });
 

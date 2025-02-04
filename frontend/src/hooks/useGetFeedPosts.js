@@ -10,6 +10,10 @@ const useGetFeedPosts = () => {
       setLoading(true);
       try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
           credentials: "include",
         });
         const data = await res.json();
