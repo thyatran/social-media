@@ -9,6 +9,8 @@ export default defineConfig({
     proxy: {
       "/api": {
         target: "https://social-media-backend-jyq3.onrender.com/",
+        changeOrigin: true,
+        secure: false,
       },
     },
   },
