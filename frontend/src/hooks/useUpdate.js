@@ -25,10 +25,14 @@ const useUpdate = () => {
       if (fullname) formData.append("fullname", fullname);
       if (profilePic) formData.append("profilePic", profilePic);
 
-      const res = await fetch(`/api/users/update/${authUser.username}`, {
-        method: "PUT",
-        body: formData,
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/users/update/${authUser.username}`,
+        {
+          method: "PUT",
+          body: formData,
+          credentials: "include",
+        }
+      );
       const data = await res.json();
 
       if (!res.ok) {

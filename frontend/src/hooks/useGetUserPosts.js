@@ -8,7 +8,9 @@ const useGetUserPosts = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const endpoint = username ? `/api/posts/user/${username}` : `/api/posts/user`;
+  const endpoint = username
+    ? `${process.env.REACT_APP_API_URL}/api/posts/user/${username}`
+    : `/api/posts/user`;
 
   useEffect(() => {
     const fetchPosts = async () => {
