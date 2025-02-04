@@ -28,7 +28,6 @@ const useSignup = () => {
             password,
             confirmPassword,
           }),
-          credentials: "include",
         }
       );
 
