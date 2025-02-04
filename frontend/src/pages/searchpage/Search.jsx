@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../components/navbar/Navbar";
-import SearchContainer from "../../components/search/searchContainer";
+import SearchContainer from "../../components/search/SearchContainer.jsx";
 
 const Search = () => {
   return (
