@@ -16,7 +16,10 @@ const useGetUserPosts = () => {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const res = await fetch(endpoint, { credentials: "include" });
+        const res = await fetch(endpoint, {
+          credentials: "include",
+        });
+
         const data = await res.json();
 
         if (!res.ok) throw new Error(data.error || "Failed to fetch posts");

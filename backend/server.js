@@ -17,11 +17,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000", // Local development URL
-      "https://social-media-fawn-iota.vercel.app", // Production URL
-    ],
-    credentials: true, // Allow credentials (cookies, authorization headers)
+    origin: ["https://social-media-eta-bay.vercel.app"],
+    credentials: true,
   })
 );
 
