@@ -32,7 +32,7 @@ const useCreatePost = () => {
       }
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/posts/create`,
+        `${import.meta.env.REACT_APP_API_URL}/api/posts/create`,
         {
           method: "POST",
           body: formData,

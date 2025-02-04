@@ -26,7 +26,7 @@ const useUpdate = () => {
       if (profilePic) formData.append("profilePic", profilePic);
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/users/update/${authUser.username}`,
+        `${import.meta.env.REACT_APP_API_URL}/api/users/update/${authUser.username}`,
         {
           method: "PUT",
           body: formData,

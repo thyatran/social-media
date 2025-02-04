@@ -9,8 +9,8 @@ const useGetUserPosts = () => {
   const [error, setError] = useState(null);
 
   const endpoint = username
-    ? `${process.env.REACT_APP_API_URL}/api/posts/user/${username}`
-    : `/api/posts/user`;
+    ? `${import.meta.env.REACT_APP_API_URL}/api/posts/user/${username}`
+    : `${import.meta.REACT_APP_API_URL}/api/posts/user`;
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -23,6 +23,7 @@ const useGetUserPosts = () => {
 
         setPosts(data);
       } catch (error) {
+        toast.error("Failed to get user posts: ", error);
         setError(error.message);
       } finally {
         setLoading(false);
