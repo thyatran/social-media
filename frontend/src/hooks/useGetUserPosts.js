@@ -8,9 +8,7 @@ const useGetUserPosts = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const endpoint = username
-    ? `${import.meta.env.VITE_API_URL}/api/posts/user/${username}`
-    : `${import.meta.env.VITE_API_URL}/api/posts/user`;
+  const endpoint = username ? `/api/posts/user/${username}` : `/api/posts/user`;
 
   useEffect(() => {
     const fetchPosts = async () => {

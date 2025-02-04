@@ -9,7 +9,7 @@ const useGetFeedPosts = () => {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts`, {
+        const res = await fetch(`/api/posts`, {
           credentials: "include",
         });
         const data = await res.json();

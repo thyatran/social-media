@@ -17,19 +17,16 @@ const useSignup = () => {
     if (!success) return;
 
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/auth/signup`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            username,
-            fullname,
-            password,
-            confirmPassword,
-          }),
-        }
-      );
+      const res = await fetch(`/api/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username,
+          fullname,
+          password,
+          confirmPassword,
+        }),
+      });
 
       const data = await res.json();
       if (data.error) {
