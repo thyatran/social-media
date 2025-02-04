@@ -10,7 +10,7 @@ const useGetUserPosts = () => {
 
   const endpoint = username
     ? `https://social-media-backend-jyq3.onrender.com/api/posts/user/${username}`
-    : `/api/posts/user`;
+    : `https://social-media-backend-jyq3.onrender.com/api/posts/user`;
 
   useEffect(() => {
     const fetchPosts = async () => {
