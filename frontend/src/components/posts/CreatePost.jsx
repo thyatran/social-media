@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaFileImage } from "react-icons/fa";
+import { useAuthContext } from "../../context/AuthContext";
 import useCreatePost from "../../hooks/useCreatePost";
 import toast from "react-hot-toast";
 
@@ -8,6 +9,8 @@ const CreatePost = ({ onClose }) => {
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
+
+  const { authUser } = useAuthContext();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -47,7 +50,7 @@ const CreatePost = ({ onClose }) => {
             {/* profile pic */}
             <div className="w-24 h-24 items-center justify-center rounded-full">
               <img
-                src="profilepic1.jpg"
+                src={authUser.profilePic || "profilepic1.jpg"}
                 alt="Profile Picture"
                 className="rounded-full border border-gray-300"
               />
@@ -56,7 +59,7 @@ const CreatePost = ({ onClose }) => {
             {/* username, content, button */}
             <div className="w-full">
               <p className="mb-2 text-xl text-black font-extrabold tracking-wide drop-shadow-md">
-                Onion_ni
+                {authUser.username}
               </p>
               <textarea
                 name="text"
