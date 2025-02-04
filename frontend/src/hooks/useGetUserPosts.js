@@ -9,8 +9,8 @@ const useGetUserPosts = () => {
   const [error, setError] = useState(null);
 
   const endpoint = username
-    ? `https://social-media-backend-jyq3.onrender.com/api/posts/user/${username}`
-    : `https://social-media-backend-jyq3.onrender.com/api/posts/user`;
+    ? `${import.meta.env.VITE_API_URL}/api/posts/user/${username}`
+    : `${import.meta.env.VITE_API_URL}/api/posts/user`;
 
   useEffect(() => {
     const fetchPosts = async () => {

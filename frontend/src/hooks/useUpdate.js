@@ -26,7 +26,7 @@ const useUpdate = () => {
       if (profilePic) formData.append("profilePic", profilePic);
 
       const res = await fetch(
-        `https://social-media-backend-jyq3.onrender.com/api/users/update/${authUser.username}`,
+        `${import.meta.env.VITE_API_URL}/api/users/update/${authUser.username}`,
         {
           method: "PUT",
           body: formData,

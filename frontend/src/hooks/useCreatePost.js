@@ -32,7 +32,7 @@ const useCreatePost = () => {
       }
 
       const res = await fetch(
-        `https://social-media-backend-jyq3.onrender.com/api/posts/create`,
+        `${import.meta.env.VITE_API_URL}/api/posts/create`,
         {
           method: "POST",
           body: formData,
