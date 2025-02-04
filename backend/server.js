@@ -18,6 +18,7 @@ const app = express();
 app.use(
   cors({
     origin: "https://social-media-fawn-iota.vercel.app",
+    credentials: true,
   })
 );
 app.use(express.json());
