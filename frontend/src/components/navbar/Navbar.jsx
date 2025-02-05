@@ -24,7 +24,10 @@ const Navbar = () => {
   return (
     <div className="flex md:flex-col justify-between md:justify-start items-center bg-transparent p-4 gap-4 w-full md:h-full mx-auto">
       {/* Profile */}
-      <NavLink to="/profile" className={`${linkStyle} w-20 h-auto`}>
+      <NavLink
+        to={`/profile/${authUser?.username}`}
+        className={`${linkStyle} w-20 h-auto`}
+      >
         {profilePic ? (
           <img
             src={profilePic}

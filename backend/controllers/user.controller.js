@@ -68,6 +68,8 @@ const followUnfollowUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+  // console.log("Authenticated user:", req.user);
+
   const { bio, fullname } = req.body;
   const profilePic = req.file;
   const bioLength = 150;
@@ -126,7 +128,7 @@ const updateUser = async (req, res) => {
     });
   } catch (error) {
     console.log("Error in updateUser: ", error.message);
-    res.status(500).json({ error: error.essage });
+    res.status(500).json({ error: error.message });
   }
 };
 

@@ -14,14 +14,12 @@ cloudinary.config({
 
 const createPost = async (req, res) => {
   try {
-    const { text } = req.body;
+    const { text, postedBy } = req.body;
     const image = req.file;
 
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
     }
-
-    const userId = req.user._id;
 
     if (!text) {
       return res.status(400).json({ error: "Text field is required" });
@@ -42,7 +40,7 @@ const createPost = async (req, res) => {
       imgUrl = uploadedResponse.secure_url;
     }
 
-    const newPost = new Post({ postedBy: userId, text, image: imgUrl });
+    const newPost = new Post({ postedBy, text, image: imgUrl });
     console.log("Text before submitting:", text);
 
     await newPost.save();
@@ -173,8 +171,7 @@ const getUserPosts = async (req, res) => {
     if (req.params.username) {
       user = await User.findOne({ username: req.params.username });
     } else {
-      // fetch posts for the logged-in user
-      user = await User.findById(req.user._id);
+      return res.status(404).json({ error: "User not found" });
     }
 
     if (!user) {
@@ -206,7 +203,7 @@ const editPost = async (req, res) => {
       return res.status(404).json({ error: "Post not found" });
     }
 
-    if (post.postedBy.toString() !== req.user._id.toString()) {
+    if (post.params.username !== req.user.username) {
       return res.status(401).json({ error: "Unauthorized to edit this post" });
     }
 

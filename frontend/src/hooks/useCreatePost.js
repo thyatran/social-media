@@ -13,7 +13,7 @@ const useCreatePost = () => {
       return;
     }
 
-    if (!text || text.trim() === "") {
+    if (!text.trim()) {
       toast.error("Post caption cannot be empty");
       return;
     }
@@ -22,10 +22,13 @@ const useCreatePost = () => {
       toast.error(`Caption can't be longer than ${textMaxLength} characters`);
       return;
     }
+
     setLoading(true);
+
     try {
       const formData = new FormData();
       formData.append("text", text.trim());
+      formData.append("postedBy", authUser._id);
 
       if (image) {
         formData.append("image", image);
@@ -47,6 +50,17 @@ const useCreatePost = () => {
       }
 
       toast.success("Post created successfully!");
+      return {
+        _id: data._id,
+        text: data.text,
+        image: data.image,
+        createdAt: data.createdAt,
+        postedBy: {
+          _id: authUser._id,
+          username: authUser.username,
+          profilePic: authUser.profilePic,
+        },
+      };
     } catch (error) {
       console.error("Create post error:", error);
 

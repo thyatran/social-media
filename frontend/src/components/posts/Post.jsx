@@ -1,16 +1,25 @@
 import React from "react";
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
 import { extractTime } from "../../utils/extractTime";
+import ProfilePicDefault from "../../components/profile/ProfilePicDefault";
 
 const Post = ({ post }) => {
+  const profilePic = post.postedBy.profilePic;
+
   return (
     <div className="border border-gray-300 p-4 rounded-box">
       <div className="flex items-center gap-2 mb-2">
-        <img
-          src={post.postedBy.profilePic || "/profilepic1.jpg"}
-          alt="User Avatar"
-          className="w-8 h-8 rounded-full"
-        />
+        <div className="w-8 h-8 rounded-full">
+          {profilePic ? (
+            <img
+              src={profilePic || "/profilepic1.jpg"}
+              alt="User Avatar"
+              className="w-8 h-8 rounded-full"
+            />
+          ) : (
+            <ProfilePicDefault username={post.postedBy.username} />
+          )}
+        </div>
         <p className="text-sm text-gray-800 font-semibold">
           {post.postedBy.username}
         </p>

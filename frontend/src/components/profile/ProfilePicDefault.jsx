@@ -5,7 +5,7 @@ const ProfilePicDefault = ({ username }) => {
 
   return (
     <div
-      className="w-full h-full flex items-center justify-center rounded-full text-white text-2xl font-bold"
+      className="w-full h-full flex items-center justify-center rounded-full text-white text-2xl font-bold object-cover"
       style={{ backgroundColor: "black" }}
     >
       {firstLetter}

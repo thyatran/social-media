@@ -8,8 +8,9 @@ export const useAuthContext = () => {
 };
 
 export const AuthContextProvider = ({ children }) => {
-  const [authUser, setAuthUser] =
-    useState(JSON.parse(localStorage.getItem("logged-in-user"))) || null;
+  const [authUser, setAuthUser] = useState(() => {
+    return JSON.parse(localStorage.getItem("logged-in-user")) || null;
+  });
 
   return (
     <AuthContext.Provider value={{ authUser, setAuthUser }}>

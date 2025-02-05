@@ -16,6 +16,7 @@ const useGetFeedPosts = () => {
           },
           credentials: "include",
         });
+
         const data = await res.json();
 
         if (!res.ok) throw new Error(data.error || "Failed to fetch posts");

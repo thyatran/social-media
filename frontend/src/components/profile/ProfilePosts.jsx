@@ -2,9 +2,14 @@ import React from "react";
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import useGetUserPosts from "../../hooks/useGetUserPosts";
+import ProfilePicDefault from "./ProfilePicDefault";
+import { useAuthContext } from "../../context/AuthContext";
 import { extractTime } from "../../utils/extractTime";
 
 const ProfilePosts = () => {
+  const { authUser } = useAuthContext();
+  const profilePic = authUser.profilePic;
+
   const { posts, loading, error } = useGetUserPosts();
 
   if (loading) {
@@ -24,11 +29,18 @@ const ProfilePosts = () => {
           >
             <div className="flex justify-between items-center mb-2">
               <div className="flex items-center gap-2">
-                <img
-                  src={post.postedBy?.profilePic || "/profilepic1.jpg"}
-                  alt="User Avatar"
-                  className="w-8 h-8 rounded-full"
-                />
+                <div className="w-8 h-8 items-center justify-center rounded-full">
+                  {profilePic ? (
+                    <img
+                      src={profilePic || "/profilepic1.jpg"}
+                      alt="User Avatar"
+                      className="w-8 h-8 rounded-full object-cover"
+                    />
+                  ) : (
+                    <ProfilePicDefault username={post.postedBy.username} />
+                  )}
+                </div>
+
                 <p className="text-sm text-gray-800 font-semibold">
                   {post.postedBy.username || "Unknown"}
                 </p>
