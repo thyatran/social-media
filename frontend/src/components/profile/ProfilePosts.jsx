@@ -6,23 +6,35 @@ import ProfilePicDefault from "./ProfilePicDefault";
 import { useAuthContext } from "../../context/AuthContext";
 import { extractTime } from "../../utils/extractTime";
 import EditPost from "./EditPost";
+import useDeletePost from "../../hooks/useDeletePost";
+import DeletePost from "./DeletePost";
 
 const ProfilePosts = () => {
-  const [isModalOpen, setIsModelOpen] = useState();
+  const [isModalOpen, setIsModelOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
-  const openModal = (post) => {
-    setSelectedPost(post);
-    setIsModelOpen(true);
-  };
-  const closeModal = () => {
-    setSelectedPost(null);
-    setIsModelOpen(false);
-  };
 
   const { authUser } = useAuthContext();
   const profilePic = authUser.profilePic;
 
+  const openModal = (post) => {
+    setSelectedPost(post);
+    setIsModelOpen(true);
+  };
+
+  const openDeleteModal = (post) => {
+    setSelectedPost(post);
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedPost(null);
+    setIsModelOpen(false);
+    setIsDeleteModalOpen(false);
+  };
+
   const { posts, loading, error } = useGetUserPosts();
+  const { loading: deleteLoading, deletePost } = useDeletePost();
 
   if (loading) {
     return <span className="loading loading-spinner"></span>;
@@ -31,6 +43,7 @@ const ProfilePosts = () => {
   if (error) {
     return <p className="text-red-500">{error}</p>;
   }
+
   return (
     <div className="flex flex-col gap-4">
       {posts.length > 0 ? (
@@ -74,7 +87,7 @@ const ProfilePosts = () => {
                     <a onClick={() => openModal(post)}>Edit Post</a>
                   </li>
                   <li>
-                    <a>Delete Post</a>
+                    <a onClick={() => openDeleteModal(post)}>Delete Post</a>
                   </li>
                 </ul>
               </div>
@@ -112,6 +125,13 @@ const ProfilePosts = () => {
           postId={selectedPost._id}
           currentText={selectedPost.text}
           onClose={closeModal}
+        />
+      )}
+      {isDeleteModalOpen && selectedPost && (
+        <DeletePost
+          postId={selectedPost._id}
+          onClose={closeModal}
+          deletePost={deletePost}
         />
       )}
     </div>
