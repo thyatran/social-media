@@ -14,10 +14,12 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-// "https://social-media-eta-bay.vercel.app"
+
+// origin: ["https://social-media-eta-bay.vercel.app"],
+// origin: ["http://localhost:3000"],
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://social-media-eta-bay.vercel.app"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   })

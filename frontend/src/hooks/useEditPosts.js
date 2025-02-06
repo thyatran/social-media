@@ -11,27 +11,28 @@ const useEditPost = () => {
   const textMaxLength = 500;
 
   const edit = async (text, postId) => {
-    if (!authUser) {
-      toast.error("Unauthorized to edit post");
-      return;
-    }
-
-    if (!postId) {
-      toast.error("Post ID is required");
-      return;
-    }
-
-    if (!text || text.length === 0) {
-      toast.error("Post content cannot be empty.");
-      return;
-    }
-
-    if (text.length > textMaxLength) {
-      toast.error(`Post can't be longer than ${textMaxLength} characters.`);
-      return;
-    }
     setLoading(true);
     try {
+      if (!authUser) {
+        toast.error("Unauthorized to edit post");
+        return;
+      }
+
+      if (!postId) {
+        toast.error("Post ID is required");
+        return;
+      }
+
+      if (!text || text.length === 0) {
+        toast.error("Post content cannot be empty.");
+        return;
+      }
+
+      if (text.length > textMaxLength) {
+        toast.error(`Post can't be longer than ${textMaxLength} characters.`);
+        return;
+      }
+
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/api/posts/edit/${postId}`,
         {

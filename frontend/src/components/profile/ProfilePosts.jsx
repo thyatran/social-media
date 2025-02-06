@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import useGetUserPosts from "../../hooks/useGetUserPosts";

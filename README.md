@@ -4,7 +4,7 @@ A full-stack social media platform developed using the MERN stack, providing fea
 
 ## Demo
 
-You can view the live demo of the app here: Link
+You can view the live demo of the app here: [Link](https://social-media-eta-bay.vercel.app/)
 
 ## Design
 
@@ -16,7 +16,7 @@ You can view the Figma design here: [Link](https://www.figma.com/design/NhL1mHjO
 
 - **Profile Management:** Users can create, update and display profiles with a full name, bio, and profile picture.
 
-- **Post Management:** Users can create and read posts, including text and image uploads.
+- **Post Management:** Users can create, read, edit, and delete posts, including text and image uploads.
 
 - **Responsive UI:** A modern and responsive design using React.js, Tailwind CSS, and Material-UI.
 
@@ -24,9 +24,7 @@ You can view the Figma design here: [Link](https://www.figma.com/design/NhL1mHjO
 
 ## Features In Progress
 
-- **Post Management:** Users can update and delete posts, including text and image uploads.
-
-- **CRUD Operations:** Manage posts and comments with full CRUD functionality.
+- **Replies:** Users can reply to posts. Users can edit and delete replies.
 
 - **Follow/Unfollow:** Users can follow and unfollow other users to see their posts on the feed.
 
@@ -44,7 +42,9 @@ You can view the Figma design here: [Link](https://www.figma.com/design/NhL1mHjO
 
 - **Authentication:** JWT for secure session handling
 
-- **Deployment:** Render
+- **Deployment:**
+  - **backend** Render
+  - **frontend**: Vercel
 
 ## Installation
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import useEditPosts from "../../hooks/useEditPosts";
 
 const EditPost = ({ postId, currentText, onClose }) => {

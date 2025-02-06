@@ -7,9 +7,9 @@ const EditProfile = ({ currentBio, currentFullname, onClose }) => {
   const [fullname, setFullname] = useState(currentFullname || "");
   const [profilePic, setProfilePic] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    update(bio, fullname, profilePic);
+    await update(bio, fullname, profilePic);
     onClose();
   };
 
