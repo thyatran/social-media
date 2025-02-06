@@ -1,12 +1,24 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { FaRegHeart, FaRegComment, FaHeart } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import useGetUserPosts from "../../hooks/useGetUserPosts";
 import ProfilePicDefault from "./ProfilePicDefault";
 import { useAuthContext } from "../../context/AuthContext";
 import { extractTime } from "../../utils/extractTime";
+import EditPost from "./EditPost";
 
 const ProfilePosts = () => {
+  const [isModalOpen, setIsModelOpen] = useState();
+  const [selectedPost, setSelectedPost] = useState(null);
+  const openModal = (post) => {
+    setSelectedPost(post);
+    setIsModelOpen(true);
+  };
+  const closeModal = () => {
+    setSelectedPost(null);
+    setIsModelOpen(false);
+  };
+
   const { authUser } = useAuthContext();
   const profilePic = authUser.profilePic;
 
@@ -59,7 +71,7 @@ const ProfilePosts = () => {
                   className="dropdown-content menu bg-white rounded-box z-[1] w-36 p-2 shadow"
                 >
                   <li>
-                    <a>Edit Post</a>
+                    <a onClick={() => openModal(post)}>Edit Post</a>
                   </li>
                   <li>
                     <a>Delete Post</a>
@@ -94,6 +106,13 @@ const ProfilePosts = () => {
         ))
       ) : (
         <p>No posts found</p>
+      )}
+      {isModalOpen && selectedPost && (
+        <EditPost
+          postId={selectedPost._id}
+          currentText={selectedPost.text}
+          onClose={closeModal}
+        />
       )}
     </div>
   );

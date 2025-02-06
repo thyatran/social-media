@@ -56,7 +56,7 @@ const useUpdate = () => {
         profilePic: data.profilePic,
       });
 
-      toast.success("Profile Updated Successfully");
+      toast.success("Profile updated successfully!");
     } catch (error) {
       toast.error(error.message || "An error occurred while updating");
     } finally {

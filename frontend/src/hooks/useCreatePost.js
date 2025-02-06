@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 const useCreatePost = () => {
   const [loading, setLoading] = useState(false);
   const { authUser } = useAuthContext();
+
   const textMaxLength = 500;
 
   const createPost = async (text, image) => {
@@ -30,9 +31,7 @@ const useCreatePost = () => {
       formData.append("text", text.trim());
       formData.append("postedBy", authUser._id);
 
-      if (image) {
-        formData.append("image", image);
-      }
+      if (image) formData.append("image", image);
 
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/api/posts/create`,
@@ -50,17 +49,6 @@ const useCreatePost = () => {
       }
 
       toast.success("Post created successfully!");
-      return {
-        _id: data._id,
-        text: data.text,
-        image: data.image,
-        createdAt: data.createdAt,
-        postedBy: {
-          _id: authUser._id,
-          username: authUser.username,
-          profilePic: authUser.profilePic,
-        },
-      };
     } catch (error) {
       console.error("Create post error:", error);
 

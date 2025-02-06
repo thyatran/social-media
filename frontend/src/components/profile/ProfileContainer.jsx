@@ -92,7 +92,13 @@ const ProfileContainer = () => {
           <ProfilePosts />
         </div>
       </div>
-      {isModalOpen && <EditProfile onClose={closeModal} />}
+      {isModalOpen && (
+        <EditProfile
+          currentFullname={fullname}
+          currentBio={bio}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };

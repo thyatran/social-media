@@ -42,7 +42,7 @@ const useGetUserPosts = () => {
 
     fetchPosts();
   }, [authUser, username]);
-  return { posts, loading, error };
+  return { posts, setPosts, loading, error };
 };
 
 export default useGetUserPosts;

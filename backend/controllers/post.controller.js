@@ -194,7 +194,6 @@ const getUserPosts = async (req, res) => {
 const editPost = async (req, res) => {
   try {
     const { text } = req.body;
-    const img = req.file;
     const postId = req.params.id;
 
     const post = await Post.findById(postId);
@@ -203,7 +202,7 @@ const editPost = async (req, res) => {
       return res.status(404).json({ error: "Post not found" });
     }
 
-    if (post.params.username !== req.user.username) {
+    if (!req.user.username) {
       return res.status(401).json({ error: "Unauthorized to edit this post" });
     }
 
@@ -214,21 +213,7 @@ const editPost = async (req, res) => {
         .json({ error: `Text must be less than ${maxLength} characters` });
     }
 
-    // update the image if user upload new one
-    let imgUrl = post.image;
-    if (img) {
-      // delete the old image from cloudinary
-      if (post.image) {
-        const imgId = post.image.split("/").pop().split(".")[0];
-        await cloudinary.uploader.destroy(imgId);
-      }
-
-      // upload the new image
-      const uploadedResponse = await cloudinary.uploader.upload(img.path);
-      imgUrl = uploadedResponse.secure_url;
-    }
     post.text = text || post.text;
-    post.image = imgUrl;
 
     await post.save();
     res.status(200).json(post);

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import useUpdate from "../../hooks/useUpdate";
 
-const EditProfile = ({ onClose }) => {
+const EditProfile = ({ currentBio, currentFullname, onClose }) => {
   const { loading, update } = useUpdate();
-  const [bio, setBio] = useState("");
-  const [fullname, setFullname] = useState("");
+  const [bio, setBio] = useState(currentBio || "");
+  const [fullname, setFullname] = useState(currentFullname || "");
   const [profilePic, setProfilePic] = useState(null);
 
   const handleSubmit = (e) => {

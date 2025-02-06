@@ -22,11 +22,6 @@ router.post("/create", protectRoute, upload.single("image"), createPost);
 router.delete("/:id", protectRoute, deletePost);
 router.put("/like/:id", protectRoute, likeUnlikePost);
 router.put("/reply/:id", protectRoute, replyToPost);
-router.put(
-  "/edit/:username",
-  protectRoute,
-  upload.single("profilePic"),
-  editPost
-);
+router.put("/edit/:id", protectRoute, editPost);
 
 export default router;
