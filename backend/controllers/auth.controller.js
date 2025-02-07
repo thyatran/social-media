@@ -18,7 +18,7 @@ export const signup = async (req, res) => {
     }
 
     // HASH PASSWORD HERE
-    const salt = await bcryptjs.genSalt(10); // 10 is the salt rounds
+    const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
 
     const newUser = new User({
@@ -30,9 +30,9 @@ export const signup = async (req, res) => {
     });
 
     if (newUser) {
+      await newUser.save(); // save user to db
       // Generate JWT token here
       generateTokenAndSetCookie(newUser._id, res);
-      await newUser.save(); // save user to db
 
       res.status(201).json({
         _id: newUser._id,
