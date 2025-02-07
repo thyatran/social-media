@@ -19,7 +19,12 @@ const Signup = () => {
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="w-full p-6">
-        <h1 className="text-3xl font-semibold text-center">Welcome to Aura!</h1>
+        <h1 className="text-3xl font-semibold text-center text-gray-900">
+          Welcome to Aura!
+        </h1>
+        <h3 className="text-lg font-semibold text-center text-gray-500">
+          Sign Up
+        </h3>
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="username">Username</label>
