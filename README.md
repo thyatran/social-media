@@ -22,13 +22,13 @@ You can view the Figma design here: [Link](https://www.figma.com/design/NhL1mHjO
 
 - **Cloud Storage:** Integrated with Cloudinary for efficient image storage.
 
-## Features In Progress
+<!--## Features In Progress
 
 - **Replies:** Users can reply to posts. Users can edit and delete replies.
 
 - **Follow/Unfollow:** Users can follow and unfollow other users to see their posts on the feed.
 
-- **Like/Unlike:** Users can like and unlike others' posts.
+- **Like/Unlike:** Users can like and unlike others' posts. -->
 
 ## Technology Used
 
